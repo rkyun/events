@@ -1,5 +1,8 @@
 import Navigo from 'navigo';
 
+import Home from './home';
+
+import {$id, $loadTemplate} from './utils';
 
 export default class Router {
 
@@ -12,37 +15,22 @@ export default class Router {
     }
 
     init() {
+        
+        const home = new Home();
         this.router = new Navigo(this.root, this.useHash, this.hash);
 
         this.router
             .on('new', () => {
-                this.loadHTML('./../templates/new.html', 'app');                        
+                $loadTemplate('./../templates/new.html', 'app');                
             })
             .on('event', () => {
-                this.loadHTML('./../templates/event.html', 'app');
+                $loadTemplate('./../templates/event.html', 'app');
             })
-            .on(() => { 
-                this.loadHTML('./../templates/home.html', 'app'); 
-            })
+            .on(home.renderPage.bind(home))
             .notFound((query) => { 
-                this.loadHTML('./../templates/404.html', 'app');
+                $loadTemplate('./../templates/404.html', 'app');
             })
             .resolve();
-    }
-
-
-    loadHTML(url, id) {
-        const req = new XMLHttpRequest();
-        req.open('GET', url);
-        req.send();
-        req.onload = () => {
-            this.$id(id).innerHTML = req.responseText;
-        };
-    }
-
-
-    $id(id) {
-        return document.getElementById(id);
     }
 
 }
