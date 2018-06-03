@@ -32,6 +32,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "form-serialize": "^0.7.2",
     "navigo": "^7.1.2",
     "pouchdb": "^6.4.3",
     "sass-loader": "^6.0.6"
