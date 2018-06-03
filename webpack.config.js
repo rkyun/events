@@ -19,7 +19,9 @@ module.exports = {
     contentBase: path.resolve(__dirname, "dist"),
     compress: true,
     stats: "errors-only",
-    open: true
+    open: true,
+    disableHostCheck: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -45,7 +47,8 @@ module.exports = {
       filename: 'index.html'
     }),
     new CopyWebpackPlugin([
-            {from:'./src/images',to:'images'} 
+            {from:'./src/images',to:'images'},
+            {from:'./src/templates',to:'templates'} 
         ]), 
   ]
 };
